@@ -22,6 +22,7 @@
 <body>
 	<header>
 		<a href="http://www.smithsonianmag.com/history-archaeology/This_Interactive_Map_Compares_the_New_York_City_of_1836_to_Today.html">"This Interactive Map Compares the New York City of 1836 to Today"</a>, redone with <a href="http://leafletjs.com/">Leaflet</a>
+		<br />
 	</header>
 
 	<div id="map"></div>
@@ -37,18 +38,23 @@
 		center: [ 40.71, -74.00],
 		zoom: 14
 	});
+	var esriAttribution = 'Source: Esri, DigitalGlobe, GeoEye, i-cubed, USDA, USGS, AEX, Getmapping, Aerogrid, IGN, IGP, swisstopo, and the GIS User Community'
 
 
-	var ny1836 = L.tileLayer.masked('http://tiles2.arcgis.com/tiles/IEuSomXfi6iB7a25/arcgis/rest/services/New_York_City_1836/MapServer/tile/{z}/{y}/{x}').toggleMask().addTo(map);
+	var ny1836 = L.tileLayer.masked('http://tiles2.arcgis.com/tiles/IEuSomXfi6iB7a25/arcgis/rest/services/New_York_City_1836/MapServer/tile/{z}/{y}/{x}', {
+		attribution: esriAttribution
+	}).toggleMask().addTo(map);
 
-	var nyNow = L.tileLayer.masked('http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}').addTo(map);
+	var nyNow = L.tileLayer.masked('http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+		attribution: esriAttribution
+	}).addTo(map);
 
 	var currentSpy = nyNow;
 
 	var control = L.control();
 	control.onAdd = function (map) {
 		button = L.DomUtil.create('button', 'toggle');
-		button.innerHTML = 'Swap views'
+		button.innerHTML = 'Swap views';
 
 		var clickListener = function (e) {
 			L.DomEvent.stop(e);

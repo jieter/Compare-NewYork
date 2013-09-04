@@ -31,7 +31,7 @@ L.TileLayer.Masked = L.TileLayer.extend({
 			return;
 		}
 		if (!this._mask) {
-			this._setClipPath()
+			this._setClipPath();
 			return;
 		}
 		var center = this._map
@@ -52,7 +52,7 @@ L.TileLayer.Masked = L.TileLayer.extend({
 	},
 
 	_setClipPath: function (options) {
-		this._container.style['webkitClipPath'] = this._map && options ?
+		this._container.style.webkitClipPath = this._map && options ?
 			L.Util.template('circle({x}px, {y}px, {r}px)', options) :
 			'';
 	}
