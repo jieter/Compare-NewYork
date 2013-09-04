@@ -1,11 +1,18 @@
 /**
- * Tilelayer with shape to mask the layer.
+ * Tilelayer a mask.
  */
 
 
 
 L.TileLayer.Masked = L.TileLayer.extend({
 	_mask: true,
+
+	initialize: function (url, options) {
+		L.TileLayer.prototype.initialize.call(this, url, options);
+
+		this.options.maskOffset = this.options.maskOffset || L.point(0, 0);
+		this._masked = this.options.initiallyMasked || false;
+	},
 
 	onAdd: function (map) {
 		L.TileLayer.prototype.onAdd.call(this, map);
@@ -30,31 +37,37 @@ L.TileLayer.Masked = L.TileLayer.extend({
 		if (!this._map) {
 			return;
 		}
-		if (!this._mask) {
+		if (!this._masked) {
 			this._setClipPath();
 			return;
 		}
 		var map = this._map;
+
 		var center = map._getCenterLayerPoint()
-			.add(L.DomUtil.getViewportOffset(this._container));
+			.add(L.DomUtil.getViewportOffset(this._container))
+			.subtract(L.DomUtil.getViewportOffset(map.getContainer()))
+			.add(this.options.maskOffset);
 
 		this._setClipPath({
 			x: center.x,
-			y: center.y - L.DomUtil.getViewportOffset(map.getContainer()).y,
+			y: center.y,
 			r: 150
 		});
 	},
 
 	toggleMask: function () {
-		this._mask = !this._mask;
+		return this.setMask();
+	},
+	setMask: function (val) {
+		this._masked = (val !== undefined) ? val : !this._masked;
+
 		this._updateClipPath();
 		return this;
 	},
 
 	_setClipPath: function (options) {
-		this._container.style.webkitClipPath = this._map && options ?
-			L.Util.template('circle({x}px, {y}px, {r}px)', options) :
-			'';
+		this._container.style.webkitClipPath = (this._map && options) ?
+			L.Util.template('circle({x}px, {y}px, {r}px)', options) : '';
 	}
 });
 
