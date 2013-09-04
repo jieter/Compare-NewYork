@@ -34,13 +34,13 @@ L.TileLayer.Masked = L.TileLayer.extend({
 			this._setClipPath();
 			return;
 		}
-		var center = this._map
-			._getCenterLayerPoint()
+		var map = this._map;
+		var center = map._getCenterLayerPoint()
 			.add(L.DomUtil.getViewportOffset(this._container));
 
 		this._setClipPath({
 			x: center.x,
-			y: center.y,
+			y: center.y - L.DomUtil.getViewportOffset(map.getContainer()).y,
 			r: 150
 		});
 	},
