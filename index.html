@@ -39,9 +39,9 @@
 	});
 
 
-	var ny1836 = maskedLayer('http://tiles2.arcgis.com/tiles/IEuSomXfi6iB7a25/arcgis/rest/services/New_York_City_1836/MapServer/tile/{z}/{y}/{x}').toggleMask().addTo(map);
+	var ny1836 = L.tileLayer.masked('http://tiles2.arcgis.com/tiles/IEuSomXfi6iB7a25/arcgis/rest/services/New_York_City_1836/MapServer/tile/{z}/{y}/{x}').toggleMask().addTo(map);
 
-	var nyNow = maskedLayer('http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}').addTo(map);
+	var nyNow = L.tileLayer.masked('http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}').addTo(map);
 
 	var currentSpy = nyNow;
 

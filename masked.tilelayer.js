@@ -4,7 +4,7 @@
 
 
 
-var MaskedLayer = L.TileLayer.extend({
+L.TileLayer.Masked = L.TileLayer.extend({
 	_mask: true,
 
 	onAdd: function (map) {
@@ -34,7 +34,9 @@ var MaskedLayer = L.TileLayer.extend({
 			this._setClipPath()
 			return;
 		}
-		var center = this._map._getCenterLayerPoint();
+		var center = this._map
+			._getCenterLayerPoint()
+			.add(L.DomUtil.getViewportOffset(this._container));
 
 		this._setClipPath({
 			x: center.x,
@@ -56,6 +58,6 @@ var MaskedLayer = L.TileLayer.extend({
 	}
 });
 
-var maskedLayer = function (url, options) {
-	return new MaskedLayer(url, options);
+L.tileLayer.masked = function (url, options) {
+	return new L.TileLayer.Masked(url, options);
 };
