@@ -13,4 +13,5 @@ http://jieter.github.io/Compare-NewYork/four-layers.html
 
 
 ### Clipping resources
-http://www.html5rocks.com/en/tutorials/masking/adobe/
+- http://www.html5rocks.com/en/tutorials/masking/adobe/
+- https://npmjs.org/package/clip-path-polygon cross browser clip-path.

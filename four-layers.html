@@ -124,8 +124,8 @@
 		var clickListener = function (e) {
 			L.DomEvent.stop(e);
 
-			shiftLayers();
 			pointer++;
+			shiftLayers();
 		};
 
 		L.DomEvent.addListener(button, 'click', clickListener);
@@ -137,7 +137,9 @@
 	$('#opacity').on('change', function (e) {
 		opacity = $(this).val() / 100;
 
-		shiftLayers();
+		layers.forEach(function (layer) {
+			layer.setOpacity(opacity);
+		});
 	});
 
 	</script>
