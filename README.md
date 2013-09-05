@@ -8,8 +8,8 @@ http://www.smithsonianmag.com/history-archaeology/This_Interactive_Map_Compares_
 Only works in webkit browsers.
 
 ### Examples
-http://jieter.github.io/Compare-NewYork/index.html
-http://jieter.github.io/Compare-NewYork/four-layers.html
+ - http://jieter.github.io/Compare-NewYork/index.html
+ - http://jieter.github.io/Compare-NewYork/four-layers.html
 
 
 ### Clipping resources
