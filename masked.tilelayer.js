@@ -1,17 +1,20 @@
 /**
- * Tilelayer a mask.
+ * Tilelayer with a mask.
  */
 
 
 
 L.TileLayer.Masked = L.TileLayer.extend({
-	_mask: true,
+	options: {
+		maskOffset: L.point(0, 0),
+		initiallyMasked: true,
+		radius: 150
+	},
 
 	initialize: function (url, options) {
 		L.TileLayer.prototype.initialize.call(this, url, options);
 
-		this.options.maskOffset = this.options.maskOffset || L.point(0, 0);
-		this._masked = this.options.initiallyMasked || false;
+		this._masked = this.options.initiallyMasked;
 	},
 
 	onAdd: function (map) {
@@ -51,14 +54,15 @@ L.TileLayer.Masked = L.TileLayer.extend({
 		this._setClipPath({
 			x: center.x,
 			y: center.y,
-			r: 150
+			r: this.options.radius
 		});
 	},
 
 	toggleMask: function () {
-		return this.setMask();
+		return this.setMasked();
 	},
-	setMask: function (val) {
+
+	setMasked: function (val) {
 		this._masked = (val !== undefined) ? val : !this._masked;
 
 		this._updateClipPath();

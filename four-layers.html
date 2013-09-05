@@ -45,11 +45,11 @@
 	<script src="masked.tilelayer.js"></script>
 	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 	<script>
-	var map = L.map('map', {
+		var map = L.map('map', {
 		center: [ 40.71, -74.00],
 		zoom: 14
 	});
-	var esriAttribution = 'Source: Esri, DigitalGlobe, GeoEye, i-cubed, USDA, USGS, AEX, Getmapping, Aerogrid, IGN, IGP, swisstopo, and the GIS User Community'
+	var esriAttribution = 'Source: Esri, DigitalGlobe, GeoEye, i-cubed, USDA, USGS, AEX, Getmapping, Aerogrid, IGN, IGP, swisstopo, and the GIS User Community';
 
 	var r = 140;
 	var deg2rad = Math.PI / 180;
@@ -99,42 +99,33 @@
 
 	var pointer = 0;
 	function shiftLayers() {
-		var start = pointer % 4;
 		var index;
 
 		for (var i = 0; i < 4; i++) {
 			index = (i + pointer) % 4;
 
 			layers[i].options.maskOffset = offsets[index];
-			layers[i].setMask(masked[index]);
+			layers[i].setMasked(masked[index]);
 
 			if (!masked[index]) {
-			 	layers[i].bringToBack();
+				layers[i].bringToBack();
 			}
 			layers[i].setOpacity(masked[index] ? opacity : 1);
 		}
-		pointer++;
 	}
 
-	$('#opacity').on('change', function (e) {
-		opacity = $(this).val() / 100;
-
-		pointer--;
-		shiftLayers();
-	});
-
 	shiftLayers();
-
 
 	var control = L.control();
 	control.onAdd = function (map) {
 		button = L.DomUtil.create('button', 'toggle');
-		button.innerHTML = 'Swap views';
+		button.innerHTML = 'Cycle views';
 
 		var clickListener = function (e) {
 			L.DomEvent.stop(e);
 
 			shiftLayers();
+			pointer++;
 		};
 
 		L.DomEvent.addListener(button, 'click', clickListener);
@@ -143,6 +134,12 @@
 		return button;
 	};
 	control.addTo(map);
+	$('#opacity').on('change', function (e) {
+		opacity = $(this).val() / 100;
+
+		shiftLayers();
+	});
+
 	</script>
 </body>
 </html>
