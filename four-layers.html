@@ -138,7 +138,10 @@
 		opacity = $(this).val() / 100;
 
 		layers.forEach(function (layer) {
-			layer.setOpacity(opacity);
+			if (layer._masked) {
+				layer.setOpacity(opacity);
+
+			}
 		});
 	});
 
