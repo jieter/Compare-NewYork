@@ -3,10 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<title>This Interactive Map Compares the New York City of 1836 to Today</title>
-	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
-	<!--[if lte IE 8]>
-		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" />
-	<![endif]-->
+
+	<link rel="stylesheet" href="/leaflet-0.7/leaflet.css" />
 	<style type="text/css">
 		html, body { width: 100%; height: 100%; margin: 0; }
 		header {
@@ -32,20 +30,21 @@
 		var L_DISABLE_3D = true;
 	</script>
 
-	<script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet-src.js"></script>
+	<script src="/leaflet-0.7/leaflet-src.js"></script>
 	<script src="masked.tilelayer.js"></script>
 	<script>
 	var map = L.map('map', {
-		center: [ 40.71, -74.00],
+		center: [40.71, -74.00],
 		zoom: 14
 	});
+
 	var esriAttribution = 'Source: Esri, DigitalGlobe, GeoEye, i-cubed, USDA, USGS, AEX, Getmapping, Aerogrid, IGN, IGP, swisstopo, and the GIS User Community'
 
-	var ny1836 = L.tileLayer.masked('http://tiles2.arcgis.com/tiles/IEuSomXfi6iB7a25/arcgis/rest/services/New_York_City_1836/MapServer/tile/{z}/{y}/{x}', {
+	var nyNow = L.tileLayer.masked('http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
 		attribution: esriAttribution
 	}).toggleMask().addTo(map);
 
-	var nyNow = L.tileLayer.masked('http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+	var ny1836 = L.tileLayer.masked('http://tiles2.arcgis.com/tiles/IEuSomXfi6iB7a25/arcgis/rest/services/New_York_City_1836/MapServer/tile/{z}/{y}/{x}', {
 		attribution: esriAttribution
 	}).addTo(map);
 

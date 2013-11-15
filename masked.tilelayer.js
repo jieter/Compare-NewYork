@@ -21,7 +21,8 @@ L.TileLayer.Masked = L.TileLayer.extend({
 		L.TileLayer.prototype.onAdd.call(this, map);
 		map.on({
 			'viewreset': this._updateClipPath,
-			'move': this._updateClipPath
+			'move': this._updateClipPath,
+			'moveend': this._updateClipPath
 		}, this);
 
 		this._updateClipPath();
@@ -32,7 +33,8 @@ L.TileLayer.Masked = L.TileLayer.extend({
 
 		map.off({
 			'viewreset': this._updateClipPath,
-			'move': this._updateClipPath
+			'move': this._updateClipPath,
+			'moveend': this._updateClipPath
 		}, this);
 	},
 
